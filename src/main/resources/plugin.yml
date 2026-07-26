@@ -1,7 +1,24 @@
 name: PingDisplay
 version: '${project.version}'
 main: io.github.emptyenemy.pingdisplay.PingDisplayPlugin
-api-version: '1.21'
+api-version: '26.2'
 description: Плагин для отображения пинга игроков в таб-листе.
 author: emptyenemy
 website: https://github.com/emptyenemy/ping_display
+
+commands:
+  pingdisplay:
+    description: Управление плагином PingDisplay.
+    usage: /<command> [игрок | on | off | reload | help]
+    aliases: [pd]
+
+permissions:
+  pingdisplay.check:
+    description: Позволяет смотреть текущий пинг командой /pingdisplay.
+    default: true
+  pingdisplay.toggle:
+    description: Позволяет включать и выключать отображение пинга.
+    default: op
+  pingdisplay.reload:
+    description: Позволяет перезагружать конфигурацию PingDisplay без рестарта сервера.
+    default: op
