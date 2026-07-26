@@ -7,16 +7,43 @@ import org.bukkit.scheduler.BukkitRunnable;
 
 public class PingDisplayPlugin extends JavaPlugin {
 
+    // Интервал по умолчанию: 20 тиков = 1 секунда
+    private static final int DEFAULT_UPDATE_INTERVAL = 20;
+
     private int pingUpdateInterval;
 
     @Override
     public void onEnable() {
         // Загружаем конфигурацию
         saveDefaultConfig();  // Если файл не существует, создаём его
-        pingUpdateInterval = getConfig().getInt("ping-update-interval", 20);  // Загружаем интервал из конфига
+        pingUpdateInterval = readUpdateInterval();
 
         // Запуск задачи для обновления пинга с заданным интервалом
         startPingTask();
+    }
+
+    // setPlayerListName помечен устаревшим в пользу Adventure Component;
+    // остаётся на нём, пока плагин собирается против API 1.21
+    @SuppressWarnings("deprecation")
+    @Override
+    public void onDisable() {
+        // Возвращаем игрокам обычные имена: иначе после выгрузки плагина
+        // в таб-листе навсегда останется последнее показанное значение пинга.
+        // null сбрасывает имя в таб-листе на обычный ник игрока
+        for (Player player : Bukkit.getOnlinePlayers()) {
+            player.setPlayerListName(null);
+        }
+    }
+
+    // Период задачи должен быть положительным, иначе планировщик отклонит её
+    private int readUpdateInterval() {
+        int interval = getConfig().getInt("ping-update-interval", DEFAULT_UPDATE_INTERVAL);
+        if (interval < 1) {
+            getLogger().warning("Значение ping-update-interval должно быть не меньше 1, получено "
+                    + interval + ". Используется значение по умолчанию: " + DEFAULT_UPDATE_INTERVAL + ".");
+            return DEFAULT_UPDATE_INTERVAL;
+        }
+        return interval;
     }
 
     // Задача для обновления пинга игроков
@@ -31,9 +58,9 @@ public class PingDisplayPlugin extends JavaPlugin {
         }.runTaskTimer(this, 0L, pingUpdateInterval);  // Используем интервал из конфига
     }
 
-    @SuppressWarnings("deprecation")
+    @SuppressWarnings("deprecation")  // см. onDisable: setPlayerListName и §-коды
     private void updatePlayerPing(Player player) {
-        int ping = getPing(player);
+        int ping = player.getPing();
 
         // Определяем цвет в зависимости от значения пинга
         String pingColor;
@@ -54,9 +81,5 @@ public class PingDisplayPlugin extends JavaPlugin {
 
         // Установка нового имени в таб-листе
         player.setPlayerListName(displayName);
-    }
-
-    private int getPing(Player player) {
-        return player.getPing();
     }
 }

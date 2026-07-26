@@ -30,7 +30,7 @@ Herobrine         312 ms     ← red: high latency
 
 ## Installation
 
-1. Download `PingDisplay-1.0.0.jar` from the [releases page](https://github.com/emptyenemy/ping_display/releases).
+1. Download `PingDisplay-1.0.1.jar` from the [releases page](https://github.com/emptyenemy/ping_display/releases).
 2. Drop it into your server's `plugins/` folder.
 3. Restart the server.
 
@@ -61,15 +61,14 @@ cd ping_display
 mvn clean package
 ```
 
-The jar is produced at `target/PingDisplay-1.0.0.jar`.
+The jar is produced at `target/PingDisplay-1.0.1.jar`.
 
 ## Roadmap
 
-1.0.0 is the first public release and is intentionally minimal. Planned next:
+The plugin is intentionally minimal. Planned next:
 
 - support for current Minecraft versions;
 - in-game config reload command, no restart required;
-- restore the original tab list name when the plugin is disabled;
 - configurable thresholds and colours;
 - configurable display format instead of the hard-coded one;
 - better compatibility with other tab list plugins.
