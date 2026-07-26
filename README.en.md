@@ -10,11 +10,7 @@ A lightweight Paper/Spigot plugin that shows each player's ping directly in the 
 
 ## Preview
 
-```
-Steve              45 ms     ← green: great connection
-Alex              137 ms     ← yellow: acceptable
-Herobrine         312 ms     ← red: high latency
-```
+![Player ping in the tab list](screenshot.jpeg)
 
 | Ping | Colour |
 |------|--------|
