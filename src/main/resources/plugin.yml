@@ -1,0 +1,7 @@
+name: PingDisplay
+version: '${project.version}'
+main: io.github.emptyenemy.pingdisplay.PingDisplayPlugin
+api-version: '1.21'
+description: Плагин для отображения пинга игроков в таб-листе.
+author: emptyenemy
+website: https://github.com/emptyenemy/ping_display
