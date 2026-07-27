@@ -10,7 +10,7 @@ A lightweight Paper plugin that shows each player's ping directly in the tab lis
 
 ## Preview
 
-![Player ping in the tab list](screenshot.jpeg)
+![Player ping in the tab list](screenshot.png)
 
 Default colours:
 
